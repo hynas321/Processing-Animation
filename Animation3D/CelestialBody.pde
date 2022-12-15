@@ -21,8 +21,9 @@ class CelestialBody {
      p = v1.cross(v2);
   }
   
-  CelestialBody(float angle, int[] coords, PShape pShape, CelestialBody[] celestialBodies) {
+  CelestialBody(float angle, int[] coords, PImage pImage, PShape pShape, CelestialBody[] celestialBodies) {
      this.angle = angle;
+     this.pImage = pImage;
      this.pShape = pShape;
      this.celestialBodies = celestialBodies;
      
@@ -34,27 +35,22 @@ class CelestialBody {
   void display() {
     pushMatrix();
     
-    if (pShape != null) {
-
-    }
-    
     if (pImage != null) {
-
+      pShape.setTexture(pImage);
     }
-    
-    if (pShape == null && pImage == null) {
-      
+    else {
+      pShape.setFill(hexColor); 
+      rotate(angle, p.x, p.y, p.z);
+      translate(v1.x, v1.y, v1.z);
+      shape(pShape);
     }
     
     if (celestialBodies != null) {
       displayCelestialBodies();
     }
-    
-    shape(pShape);
-    rotate(angle, p.x, p.y, p.z);
-    translate(v1.x, v1.y, v1.z);
   
     popMatrix();
+
   }
   
   float getAngle() {
