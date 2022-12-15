@@ -1,5 +1,4 @@
 class CelestialBody {
-  float radius;
   float angle;
   color hexColor;
   PShape pShape;
@@ -40,10 +39,11 @@ class CelestialBody {
     }
     else {
       pShape.setFill(hexColor); 
-      rotate(angle, p.x, p.y, p.z);
-      translate(v1.x, v1.y, v1.z);
-      shape(pShape);
     }
+    
+    rotate(angle, p.x, p.y, p.z);
+    translate(v1.x, v1.y, v1.z);
+    shape(pShape);
     
     if (celestialBodies != null) {
       displayCelestialBodies();
