@@ -2,16 +2,28 @@ class CelestialBody {
   float radius;
   float angle;
   color hexColor;
+  PShape pShape;
+  PImage pImage;
   CelestialBody[] celestialBodies;
   
   PVector v1;
   PVector v2;
   PVector p;
   
-  CelestialBody(float radius, float angle, color hexColor, int[] coords, CelestialBody[] celestialBodies) {
-     this.radius = radius;
+  CelestialBody(float angle, int[] coords, color hexColor, PShape pShape, CelestialBody[] celestialBodies) {
      this.angle = angle;
      this.hexColor = hexColor;
+     this.pShape = pShape;
+     this.celestialBodies = celestialBodies;
+     
+     v1 = new PVector(coords[0], coords[1], coords[2]);
+     v2 = new PVector(1, 0, 1);
+     p = v1.cross(v2);
+  }
+  
+  CelestialBody(float angle, int[] coords, PShape pShape, CelestialBody[] celestialBodies) {
+     this.angle = angle;
+     this.pShape = pShape;
      this.celestialBodies = celestialBodies;
      
      v1 = new PVector(coords[0], coords[1], coords[2]);
@@ -21,15 +33,26 @@ class CelestialBody {
   
   void display() {
     pushMatrix();
-  
-    fill(hexColor);
-    rotate(angle, p.x, p.y, p.z);
-    translate(v1.x, v1.y, v1.z);
-    sphere(radius);
+    
+    if (pShape != null) {
+
+    }
+    
+    if (pImage != null) {
+
+    }
+    
+    if (pShape == null && pImage == null) {
+      
+    }
     
     if (celestialBodies != null) {
       displayCelestialBodies();
     }
+    
+    shape(pShape);
+    rotate(angle, p.x, p.y, p.z);
+    translate(v1.x, v1.y, v1.z);
   
     popMatrix();
   }
@@ -61,15 +84,7 @@ class CelestialBody {
   private void displayCelestialBodies() {
     for(CelestialBody celestialBody : celestialBodies) {
       pushMatrix();
-    
-      PVector celestialV1 = celestialBody.getV1();
-      PVector celestialP = celestialBody.getP();
-      
-      fill(celestialBody.getColor());
-      rotate(celestialBody.getAngle(), celestialP.x, celestialP.y, celestialP.z);
-      translate(celestialV1.x, celestialV1.y, celestialV1.z);
-      sphere(celestialBody.radius);
-    
+      celestialBody.display();
       popMatrix();
     }
   }
