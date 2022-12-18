@@ -39,13 +39,13 @@ class CelestialBody {
     
     switch (lightType) {
       case POINT:
-        pointLight(255, 0, 0, v1.x, v1.y, v1.z);
+        pointLight(255, 155, 155, v1.x, v1.y, v1.z + 500);
         break;
       case DIRECTIONAL:
-        directionalLight(0, 0, 255, v1.x, v1.y, v1.z);
+        directionalLight(255, 255, 255, v1.x, v1.y, v1.z);
         break;
       case SPOTLIGHT:
-        spotLight(0, 255, 0, v1.x, mouseY, v1.z, 0, 0, -1, PI/2, 600);
+        spotLight(0, 255, 0, v1.x, v1.y, v1.z, 0, 0, -1, PI/2, 600);
         break;
       case NONE:
         break;

@@ -2,16 +2,8 @@ import peasy.*;
 
 PeasyCam cam;
 
-int[] starCoords;
 PShape starShape;
 
-int[] moon1p2Coords;
-int[] moon2p3Coords;
-int[] moon3p3Coords;
-int[] moon4p4Coords;
-int[] moon5p4Coords;
-int[] moon6p4Coords;
-int[] moon7p4Coords;
 PShape moon1p2Shape;
 PShape moon2p3Shape;
 PShape moon3p3Shape;
@@ -20,10 +12,6 @@ PShape moon5p4Shape;
 PShape moon6p4Shape;
 PShape moon7p4Shape;
 
-int[] planet1Coords;
-int[] planet2Coords;
-int[] planet3Coords;
-int[] planet4Coords;
 PShape planet1Shape;
 PShape planet2Shape;
 PShape planet3Shape;
@@ -36,7 +24,7 @@ void setup() {
   size(1080, 720, P3D);
   noStroke();
 
-  cam = new PeasyCam(this, 1500);
+  cam = new PeasyCam(this, 5000);
  
   theta = 0;
   
@@ -61,8 +49,9 @@ void setup() {
 
 void draw() {
   background(0);
-  lights();
-
+  //lights();
+  //translate(width *.5f, height *.5f);
+  
   CelestialBody star = new CelestialBody(0, new int[] { 0, 0, 0 }, #FF0000, starShape, LightEnum.POINT, null);
   
   CelestialBody moon1p2 = new CelestialBody(theta * 3.25, new int[] { 150, 150, 150 }, #E5CCFF, moon1p2Shape, LightEnum.NONE, null);
@@ -77,7 +66,7 @@ void draw() {
   CelestialBody[] moons3 = new CelestialBody[] { moon2p3, moon3p3 };
   CelestialBody[] moons4 = new CelestialBody[] { moon4p4, moon5p4, moon6p4, moon7p4 };
   
-  CelestialBody planet1 = new CelestialBody(theta * 1/2, new int[] { 600, 600, 600 }, #FFFFFF, planet1Shape, LightEnum.SPOTLIGHT, null);
+  CelestialBody planet1 = new CelestialBody(theta * 1/2, new int[] { 600, 600, 600 }, #FFFFFF, planet1Shape, LightEnum.NONE, null);
   CelestialBody planet2 = new CelestialBody(theta * 3/8, new int[] { 900, 900, 900 }, #FFE020, planet2Shape, LightEnum.NONE, moons2);
   CelestialBody planet3 = new CelestialBody(theta * 1/3, new int[] { 1200, 1200, 1200 }, #00C000, planet3Shape, LightEnum.NONE, moons3);
   CelestialBody planet4 = new CelestialBody(theta * 1/4, new int[] { 1500, 1500, 1500 }, planet4Image, planet4Shape, LightEnum.NONE, moons4);
