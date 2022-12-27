@@ -56,4 +56,25 @@ class MovingObject {
       coords[2] += 100; //z
     }
   }
+  
+  void keyReleased() {
+    if (key == 'A' || key == 'a') {
+      coords[0] = 0;
+    } 
+    else if (key == 'D' || key == 'd') {
+      coords[0] = 0; //x
+    } 
+    else if (key == 'W' || key == 'w') {
+      coords[1] = 0; //y
+    } 
+    else if (key == 'S' || key == 's') {
+      coords[1] = 0; //y
+    }
+    else if (key == 'Q' || key == 'q') {
+      coords[2] = 0; //z
+    }
+    else if (key == 'E' || key == 'e') {
+      coords[2] ; //z
+    }
+  }
 }

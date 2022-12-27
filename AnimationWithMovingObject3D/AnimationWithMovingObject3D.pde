@@ -1,7 +1,3 @@
-import peasy.*;
-
-PeasyCam cam;
-
 PShape starShape;
 
 PShape moon1p2Shape;
@@ -30,8 +26,6 @@ float[] cameraPosition;
 void setup() {
   size(1080, 720, P3D);
   noStroke();
-
-  cam = new PeasyCam(this, 5000);
  
   theta = 0;
   
@@ -91,6 +85,10 @@ void draw() {
   planet3.display();
   planet4.display();
   movingObject.display();
+  
+  if (keyPressed) {
+    movingObject.keyPressed();
+  }
 
   theta += 0.01;
 }
