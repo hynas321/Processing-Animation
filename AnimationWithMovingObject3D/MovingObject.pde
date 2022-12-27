@@ -21,8 +21,20 @@ class MovingObject {
   
   void avoidCollisionWithSphere(CelestialBody celestialBody, int celestialBodyRadius) {
     PVector celestialBodyPVector = celestialBody.getV1();
-   
-      
+    float distance = dist(
+      celestialBodyPVector.x,
+      celestialBodyPVector.y,
+      celestialBodyPVector.z,
+      coords[0],
+      coords[1],
+      coords[2]
+    );
+    
+    if (distance <= celestialBodyRadius + sphereRadius) {
+      coords[0] += 10;
+      coords[1] += 10;
+      coords[2] += 10;
+    }
   }
   
   int[] getCoords() {

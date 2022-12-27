@@ -94,6 +94,8 @@ void draw() {
   planet4.display();
   movingObject.display();
   
+  movingObject.avoidCollisionWithSphere(star, 200);
+  
   if (keyPressed) {
     movingObject.keyPressed();
   }
@@ -116,4 +118,10 @@ void mouseMoved(MouseEvent event) {
   cameraPosition[0] = sin(angleX) * cos(angleY) * 500;
   cameraPosition[1] = sin(angleY) * 500;
   cameraPosition[2] = cos(angleX) * cos(angleY) * 500;
+}
+
+void mouseDragged() {
+  if (mouseButton == LEFT) {
+    cameraPosition[2] -= (pmouseY - mouseY) * 1000;
+  }
 }
