@@ -48,17 +48,25 @@ void setup() {
   planet1Shape.scale(100);
   
   movingObjectShape = createShape(SPHERE, 10);
-  movingObjectCoords = new int[] { 150, 150, 150 };
-  movingObject = new MovingObject(movingObjectCoords, #FFFFFF, movingObjectShape);
+  movingObjectCoords = new int[] { 0, 0, 3000 };
+  movingObject = new MovingObject(movingObjectCoords);
   
   cameraPosition = new float[] {movingObjectCoords[0], movingObjectCoords[1], movingObjectCoords[2]};
-  cameraDistance = 100;
+  cameraDistance = 500;
 }
 
 void draw() {
   background(0);
-  //lights();
-  camera(movingObject.getCoords()[0], movingObject.getCoords()[1], movingObject.getCoords()[2] + cameraDistance, movingObject.getCoords()[0], movingObject.getCoords()[1], movingObject.getCoords()[2], 0, 1, 0);
+  
+  camera(movingObject.getCoords()[0] + cameraPosition[0],
+    movingObject.getCoords()[1] + cameraPosition[1], 
+    movingObject.getCoords()[2] + cameraDistance,
+    movingObject.getCoords()[0], 
+    movingObject.getCoords()[1],
+    movingObject.getCoords()[2], 
+    0, 1, 0
+  );
+  
   
   CelestialBody star = new CelestialBody(0, new int[] { 0, 0, 0 }, #FF0000, starShape, LightEnum.POINT, null);
   
@@ -74,7 +82,7 @@ void draw() {
   CelestialBody[] moons3 = new CelestialBody[] { moon2p3, moon3p3 };
   CelestialBody[] moons4 = new CelestialBody[] { moon4p4, moon5p4, moon6p4, moon7p4 };
   
-  CelestialBody planet1 = new CelestialBody(theta * 1/2, new int[] { 600, 600, 600 }, #FFFFFF, planet1Shape, LightEnum.DIRECTIONAL, null);
+  CelestialBody planet1 = new CelestialBody(theta * 1/2, new int[] { 600, 600, 600 }, #FFFFFF, planet1Shape, LightEnum.NONE, null);
   CelestialBody planet2 = new CelestialBody(theta * 3/8, new int[] { 900, 900, 900 }, #FFE020, planet2Shape, LightEnum.NONE, moons2);
   CelestialBody planet3 = new CelestialBody(theta * 1/3, new int[] { 1200, 1200, 1200 }, #00C000, planet3Shape, LightEnum.NONE, moons3);
   CelestialBody planet4 = new CelestialBody(theta * 1/4, new int[] { 1500, 1500, 1500 }, planet4Image, planet4Shape, LightEnum.NONE, moons4);
@@ -102,13 +110,10 @@ void mouseWheel(MouseEvent event) {
 }
 
 void mouseMoved(MouseEvent event) {
-  float angle = atan2(mouseY - height / 2, mouseX - width / 2);
-  cameraPosition[0] = sin(angle) * cameraDistance;
-  cameraPosition[1] = cos(angle) * cameraDistance;
-}
-
-void mouseDragged() {
-  if (mouseButton == LEFT) {
-    cameraPosition[2] -= (pmouseY - mouseY) * 0.1;
-  }
+  float angleX = map(mouseX, 0, width, -TWO_PI, TWO_PI);
+  float angleY = map(mouseY, 0, height, -TWO_PI, TWO_PI);
+  
+  cameraPosition[0] = sin(angleX) * cos(angleY) * 500;
+  cameraPosition[1] = sin(angleY) * 500;
+  cameraPosition[2] = cos(angleX) * cos(angleY) * 500;
 }

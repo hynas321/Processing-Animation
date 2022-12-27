@@ -1,35 +1,28 @@
 class MovingObject {
   int[] coords;
-  color hexColor;
-  PShape pShape;
-  PImage pImage;
+  int sphereRadius;
   
-  MovingObject(int[] coords, color hexColor, PShape pShape) {
+  MovingObject(int[] coords) {
     this.coords = coords;
-    this.hexColor = hexColor;
-    this.pShape = pShape;
-  }
-  
-  MovingObject(int[] coords, PImage pImage, PShape pShape) {
-     this.coords = coords;
-     this.pImage = pImage;
-     this.pShape = pShape;
+    sphereRadius = 20;
   }
   
   void display() {
     pushMatrix();
     
-    if (pImage != null) {
-      pShape.setTexture(pImage);
-    }
-    else {
-      pShape.setFill(hexColor); 
-    }
-    
     translate(coords[0], coords[1], coords[2]);
-    shape(pShape);
-  
+    fill(255, 255, 255);
+    sphere(sphereRadius * 2);
+    fill(155, 255, 0);
+    box(55, 55, 55);
+    
     popMatrix();
+  }
+  
+  void avoidCollisionWithSphere(CelestialBody celestialBody, int celestialBodyRadius) {
+    PVector celestialBodyPVector = celestialBody.getV1();
+   
+      
   }
   
   int[] getCoords() {
@@ -38,22 +31,22 @@ class MovingObject {
   
   void keyPressed() {
     if (key == 'A' || key == 'a') {
-      coords[0] -= 100; //x
+      coords[0] -= 10; //x
     } 
     else if (key == 'D' || key == 'd') {
-      coords[0] += 100; //x
+      coords[0] += 10; //x
     } 
-    else if (key == 'W' || key == 'w') {
-      coords[1] -= 100; //y
-    } 
-    else if (key == 'S' || key == 's') {
-      coords[1] += 100; //y
-    }
     else if (key == 'Q' || key == 'q') {
-      coords[2] -= 100; //z
-    }
+      coords[1] -= 10; //y
+    } 
     else if (key == 'E' || key == 'e') {
-      coords[2] += 100; //z
+      coords[1] += 10; //y
+    }
+    else if (key == 'W' || key == 'w') {
+      coords[2] -= 10; //z
+    }
+    else if (key == 'S' || key == 's') {
+      coords[2] += 10; //z
     }
   }
   
@@ -64,17 +57,17 @@ class MovingObject {
     else if (key == 'D' || key == 'd') {
       coords[0] = 0; //x
     } 
-    else if (key == 'W' || key == 'w') {
+    else if (key == 'Q' || key == 'q') {
       coords[1] = 0; //y
     } 
-    else if (key == 'S' || key == 's') {
+    else if (key == 'E' || key == 'e') {
       coords[1] = 0; //y
     }
-    else if (key == 'Q' || key == 'q') {
+    else if (key == 'W' || key == 'w') {
       coords[2] = 0; //z
     }
-    else if (key == 'E' || key == 'e') {
-      coords[2] ; //z
+    else if (key == 'S' || key == 's') {
+      coords[2] = 0; //z
     }
   }
 }

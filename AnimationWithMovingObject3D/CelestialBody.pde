@@ -37,9 +37,20 @@ class CelestialBody {
   void display() {
     pushMatrix();
     
+    if (pImage != null) {
+      pShape.setTexture(pImage);
+    }
+    else {
+      pShape.setFill(hexColor); 
+    }
+    
+    rotate(angle, p.x, p.y, p.z);
+    translate(v1.x, v1.y, v1.z);
+    shape(pShape);
+    
     switch (lightType) {
       case POINT:
-        pointLight(255, 155, 155, v1.x, v1.y, v1.z + 500);
+        pointLight(255, 255, 255, v1.x, v1.y, v1.z);
         break;
       case DIRECTIONAL:
         directionalLight(255, 255, 255, v1.x, v1.y, v1.z);
@@ -51,16 +62,6 @@ class CelestialBody {
         break;
     }
     
-    if (pImage != null) {
-      pShape.setTexture(pImage);
-    }
-    else {
-      pShape.setFill(hexColor); 
-    }
-    
-    rotate(angle, p.x, p.y, p.z);
-    translate(v1.x, v1.y, v1.z);
-    shape(pShape);
     
     if (celestialBodies != null) {
       displayCelestialBodies();
